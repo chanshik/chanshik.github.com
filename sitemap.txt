@@ -1,10 +1,10 @@
 
-http://username.github.com/pages.html
-http://username.github.com/atom.xml
-http://username.github.com/index.html
-http://username.github.com/archive.html
-http://username.github.com/sitemap.txt
-http://username.github.com/tags.html
-http://username.github.com/categories.html
+http://codeholic.net/pages.html
+http://codeholic.net/atom.xml
+http://codeholic.net/index.html
+http://codeholic.net/archive.html
+http://codeholic.net/sitemap.txt
+http://codeholic.net/tags.html
+http://codeholic.net/categories.html
 
-http://username.github.com/lessons/2011/12/29/jekyll-introduction
+http://codeholic.net/2012/12/04/
