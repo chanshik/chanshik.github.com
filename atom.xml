@@ -4,7 +4,7 @@
  <title>CODEHolic</title>
  <link href="http://codeholic.net/atom.xml" rel="self"/>
  <link href="http://codeholic.net"/>
- <updated>2012-12-05T03:05:41+09:00</updated>
+ <updated>2012-12-06T01:29:15+09:00</updated>
  <id>http://codeholic.net</id>
  <author>
    <name>Chan Shik Lim</name>
@@ -13,36 +13,37 @@
 
  
  <entry>
-   <title>Markdown을 위한 QuickLook 플러그인</title>
-   <link href="http://codeholic.net/2012/12/04/"/>
-   <updated>2012-12-04T00:00:00+09:00</updated>
-   <id>http://codeholic.net/2012/12/</id>
-   <content type="html">&lt;h2 id='__'&gt;압축 파일 관련&lt;/h2&gt;
+   <title>QuickLook Plugins</title>
+   <link href="http://codeholic.net/Tips/2012/12/05/quicklook-plugins"/>
+   <updated>2012-12-05T00:00:00+09:00</updated>
+   <id>http://codeholic.net/Tips/2012/12/05/quicklook-plugins</id>
+   <content type="html">&lt;h2&gt;압축 파일 관련&lt;/h2&gt;
 
-&lt;h3 id='betterzip'&gt;BetterZip&lt;/h3&gt;
+&lt;h3&gt;BetterZip&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Zip 파일 미리 보기&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;Zip 파일 미리 보기&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;http://macitbetter.com/BetterZip-Quick-Look-Generator/
+&lt;p&gt;  &lt;a href=&quot;http://macitbetter.com/BetterZip-Quick-Look-Generator/&quot;&gt;http://macitbetter.com/BetterZip-Quick-Look-Generator/&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;실행 후 바로 적용 시키기 위해 아래 명령 입력&lt;/p&gt;
 
-* 실행 후 바로 적용 시키기 위해 아래 명령 입력
-```
-$ qlmanage -r
-```&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
+&lt;p&gt;  &lt;code&gt;
+  $ qlmanage -r
+ &lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id='qlmarkdown'&gt;QLMarkdown&lt;/h3&gt;
+
+&lt;h2&gt;Markdown 관련&lt;/h2&gt;
+
+&lt;h3&gt;QLMarkdown&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Markdown 문법으로 작성된 문서 미리 보기&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;Markdown 문법으로 작성된 문서 미리 보기&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;https://github.com/toland/qlmarkdown&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</content>
+&lt;p&gt;  https://github.com/toland/qlmarkdown&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
  </entry>
  
  
