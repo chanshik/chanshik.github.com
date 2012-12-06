@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>GitLabHQ Installation</title>
+    <meta name="description" content="GitLabHQ installation on CentOS">
+    <meta name="author" content="Chan Shik Lim">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">CODEHolic</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>GitLabHQ Installation </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <h2>CentOS 환경에서 GitLab 설치</h2>
+
+<h3>기본적인 설치</h3>
+
+<p>GitLab 설치 문서와 CentOS 6 환경에서 GitLab을 설치하는 방법을 다룬 아래 사이트를 참조하여 설치를 진행하자.</p>
+
+<p><a href="https://github.com/gitlabhq/gitlabhq/blob/stable/doc/install/installation.md">GitLab Installation</a></p>
+
+<p><a href="https://gist.github.com/1601228">https://gist.github.com/1601228</a></p>
+
+<p><a href="http://dlaxar.blogspot.co.at/2012/06/installing-gitlab-with-gitolite-on.html">http://dlaxar.blogspot.co.at/2012/06/installing-gitlab-with-gitolite-on.html</a></p>
+
+<p>여기에서는 CentOS 5 환경에서 설치를 진행할 때 발생하는 문제점과 위에서 언급되지 않은 오류가 발생하였을 때, 어떻게 해결할지에 대해서 다룬다.</p>
+
+<h3>Python 2.7 설치</h3>
+
+<p>CentOS 5 에는 기본적으로 Python 2.4 버전이 설치되어 있고, 2.6 버전을 패키지로 설치할 수 있다.
+또한, yum 스크립트에서 2.4 버전에 대한 의존성을 가지고 있다.</p>
+
+<p>GitLab 을 설치하기 전에 Python 버전을 2.7로 올리고 진행을 하자.</p>
+
+<p><a href="http://www.codingwithcody.com/2012/01/python-2-7-on-centos-5-6/">Python 2.7 on CentOS 5-6</a></p>
+
+<p>위 사이트에서 Python 2.7을 한번에 설치해주는 스크립트를 얻을 수 있다.</p>
+
+<p>install.sh</p>
+
+<pre>
+yum -y install gcc gdbm-devel readline-devel ncurses-devel zlib-devel bzip2-devel sqlite-devel db4-devel openssl-devel tk-devel bluez-libs-devel make
+cd /var/tmp
+
+wget http://sqlite.org/sqlite-amalgamation-3.7.3.tar.gz
+tar xfz sqlite-amalgamation-3.7.3.tar.gz
+cd sqlite-3.7.3/
+./configure
+make
+make install
+
+cd /var/tmp
+wget http://www.python.org/ftp/python/2.7.1/Python-2.7.1.tgz
+tar xvfz Python-2.7.1.tgz
+cd Python-2.7.1
+./configure --prefix=/opt/python2.7.1 --with-threads --enable-shared
+make
+make install
+ 
+touch /etc/ld.so.conf.d/opt-python2.7.1.conf
+echo "/opt/python2.7.1/lib/" >> /etc/ld.so.conf.d/opt-python2.7.1.conf
+ldconfig
+ 
+ln -sf /opt/python2.7.1/bin/python /usr/bin/python2.7
+ 
+cd /var/tmp
+wget http://pypi.python.org/packages/2.7/s/setuptools/setuptools-0.6c11-py2.7.egg
+sh setuptools-0.6c11-py2.7.egg --prefix=/opt/python2.7.1
+ 
+/opt/python2.7.1/bin/easy_install pip
+ln -sf /opt/python2.7.1/bin/pip /usr/bin/pip
+ 
+pip install virtualenv
+ln -sf /opt/python2.7.1/bin/virtualenv /usr/bin/virtualenv
+ 
+mv /usr/bin/python /usr/bin/python-backup
+ln -s /usr/bin/python2.7 /usr/bin/python
+</pre>
+
+
+<p>위 코드를 install.sh 에 저장하고 루트 권한으로 실행하면
+/usr/bin/python2.7 명령어를 통해 2.7 버전 Python을 실행할 수 있다.</p>
+
+<p>2.7 버전을 기본 Python 명령어로 지정하자.</p>
+
+<p><code>
+$ sudo ln -s /usr/bin/python2.7 /usr/bin/python
+</code></p>
+
+<p>마지막으로 2.4 버전에 대한 의존성을 가지고 있는 yum 스크립트를 열어
+가장 첫 줄을 아래와 같이 수정한다.</p>
+
+<pre>
+#!/usr/bin/python2.4
+</pre>
+
+
+<h3>charlock_holmes 설치 중에 -licui18n 오류 발생시</h3>
+
+<pre>
+$ sudo gem install charlock_holmes
+
+...
+checking for main() in -licui18n... no
+...
+</pre>
+
+
+<p>위와 같은 오류가 발생할 경우에는 libicu-devel 패키지를 설치한다.</p>
+
+<p><code>
+$ sudo yum install libicu-devel
+</code></p>
+
+<h3>git 와 gitlab 계정</h3>
+
+<ul>
+<li><p>gitolite 프로그램은 git 계정에서 실행하여, <strong>git clone</strong> 등 git 명령어를 처리하는 역할을 한다.</p></li>
+<li><p>gitlab 계정은 웹을 통해 SSH 비밀키를 등록할 수 있게 해주는 기능을 제공한다.</p></li>
+</ul>
+
+
+<p>설치 과정 중에 git / gitlab 계정을 서로 자신이 속한 그룹에 포함시키는 과정이 있다. git / gitlab 계정에서 서로 상대방 계정에 속해있는 파일에 접근할 수 있도록 해주는 작업인데, 이를 통해 웹과 Shell 계정을 연동할 수 있다.</p>
+
+<p>GitLab 웹을 통해 추가한 SSH 비밀키를 git 계정 안에 있는 .ssh/authorized_keys 파일에 추가하여 키 기반 인증을 진행할 수 있도록 한다.</p>
+
+<h3>통지에 사용할 E-Mail (GMail 사용시) 등록</h3>
+
+<p><code>
+$ vi /home/gitlab/gitlab/config/environments/production.rb
+</code></p>
+
+<p>아래 내용을 추가한다.</p>
+
+<pre>
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => 'smtp.gmail.com',
+    :port => 587,
+    :domain => 'domain.com',
+    :authentication => :plain,
+    :user_name => 'account@domain.com',
+    :password => 'password',
+    :enable_starttls_auto => true
+  }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+</pre>
+
+
+<h3>메일이 발송되지 않을 경우에 resque 재시작</h3>
+
+<p>메일에 관련된 설정을 변경하면 resque 프로세스를 다시 시작하여 바뀐 설정을 적용한다.</p>
+
+<pre>
+$ ps ax | grep resque
+ 8409 pts/0    R+     0:00 grep resque
+30293 ?        Sl     0:16 resque-1.23.0: Paused
+
+$ sudo kill -9 30293
+
+$ sudo -u gitlab sh -l -c "cd /home/gitlab/gitlab > /dev/null 2>&1 && ./resque.sh"
+</pre>
+
+
+<h3>SSL 설정</h3>
+
+<p>발급 받은 SSL 키를 이용해 HTTPS로 접속할 수 있게 설정하자.</p>
+
+<p>우선 HTTP(80)를 통해 들어온 연결을 HTTPS(443) 포트로 돌리도록 설정한다.</p>
+
+<p><code>
+$ sudo vi /etc/nginx/nginx.conf
+</code></p>
+
+<pre>
+    ..
+    server {
+        listen       80;
+        server_name  domain.com;
+
+       location / {
+           rewrite ^ https://domain.com permanent;
+       }
+    }
+    ..
+</pre>
+
+
+<p>HTTPS 접속을 처리할 server를 추가한다.</p>
+
+<pre>
+server {
+  listen 443;
+  server_name domain.com;
+  root /home/gitlab/gitlab/public;
+
+  # individual nginx logs for this gitlab vhost
+  access_log  /var/log/nginx/gitlab_access.log;
+  error_log   /var/log/nginx/gitlab_error.log;
+
+        ssl                  on;
+        #ssl_certificate      cert.pem;
+        #ssl_certificate_key  cert.key;
+        ssl_certificate      /var/ssl/ssl_certificate.crt/
+        ssl_certificate_key  /var/ssl/ssl_certificate_key/
+
+        ssl_session_timeout  5m;
+        ssl_protocols  SSLv2 SSLv3 TLSv1;
+        ssl_ciphers  HIGH:!aNULL:!MD5;
+        ssl_prefer_server_ciphers   on;
+
+
+  location / {
+    # serve static files from defined root folder;.
+    # @gitlab is a named location for the upstream fallback, see below
+    try_files $uri $uri/index.html $uri.html @gitlab;
+  }
+
+  # if a file, which is not found in the root folder is requested,
+  # then the proxy pass the request to the upsteam (gitlab unicorn)
+  location @gitlab {
+    proxy_read_timeout 300;
+    proxy_connect_timeout 300;
+    proxy_redirect     off;
+
+    proxy_set_header   X-Forwarded-Proto $scheme;
+    proxy_set_header   Host              $http_host;
+    proxy_set_header   X-Real-IP         $remote_addr;
+
+    proxy_pass http://gitlab;
+  }
+}
+</pre>
+
+
+<h2>참고 문서</h2>
+
+<p><a href="https://github.com/gitlabhq/gitlabhq/blob/stable/doc/install/installation.md">GitLab Installation</a></p>
+
+<p><a href="http://devday.tistory.com/entry/icu-required-brew-install-icu4c-or-aptget-install-libicudev">icu required (brew install icu4c or apt-get install libicu-dev</a></p>
+
+<p><a href="http://stackoverflow.com/questions/10690255/gitlab-email-setup">GitLab email setup</a></p>
+
+<p><a href="https://github.com/gitlabhq/gitlabhq/issues/1068">Notification emails not sent</a></p>
+
+<p><a href="https://gist.github.com/1601228">https://gist.github.com/1601228</a></p>
+
+<p><a href="http://dlaxar.blogspot.co.at/2012/06/installing-gitlab-with-gitolite-on.html">Installing gitlab with gitolite on</a></p>
+
+<p><a href="http://www.codingwithcody.com/2012/01/python-2-7-on-centos-5-6/">Python 2.7 on CentOS 5-6</a></p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/Tips/2012/12/05/quicklook-plugins" title="QuickLook Plugins">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next disabled"><a>Next &rarr;</a>
+      
+      </ul>
+    </div>
+    <hr>
+    
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>07 December 2012</span></div>
+
+  
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    
+
+
+  
+     
+    	<li><a href="/tags.html#linux-ref">linux <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#gitlab-ref">gitlab <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#centos-ref">centos <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#ruby on rails-ref">ruby on rails <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Chan Shik Lim 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+
