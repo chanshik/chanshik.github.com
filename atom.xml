@@ -4,7 +4,7 @@
  <title>CODEHolic</title>
  <link href="http://codeholic.net/atom.xml" rel="self"/>
  <link href="http://codeholic.net"/>
- <updated>2012-12-07T19:15:22+09:00</updated>
+ <updated>2012-12-07T19:34:11+09:00</updated>
  <id>http://codeholic.net</id>
  <author>
    <name>Chan Shik Lim</name>
@@ -14,9 +14,9 @@
  
  <entry>
    <title>GitLabHQ Installation</title>
-   <link href="http://codeholic.net/Tips/2012/12/07/gitlabhq-installation"/>
+   <link href="http://codeholic.net/Application/2012/12/07/gitlabhq-installation"/>
    <updated>2012-12-07T00:00:00+09:00</updated>
-   <id>http://codeholic.net/Tips/2012/12/07/gitlabhq-installation</id>
+   <id>http://codeholic.net/Application/2012/12/07/gitlabhq-installation</id>
    <content type="html">&lt;h2&gt;CentOS 환경에서 GitLab 설치&lt;/h2&gt;
 
 &lt;h3&gt;기본적인 설치&lt;/h3&gt;
@@ -255,6 +255,30 @@ server {
 &lt;p&gt;&lt;a href=&quot;http://dlaxar.blogspot.co.at/2012/06/installing-gitlab-with-gitolite-on.html&quot;&gt;Installing gitlab with gitolite on&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://www.codingwithcody.com/2012/01/python-2-7-on-centos-5-6/&quot;&gt;Python 2.7 on CentOS 5-6&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Using AirVideo on Windows / Mac</title>
+   <link href="http://codeholic.net/Tips/2012/12/06/using-airvideo-on-windows--mac"/>
+   <updated>2012-12-06T00:00:00+09:00</updated>
+   <id>http://codeholic.net/Tips/2012/12/06/using-airvideo-on-windows--mac</id>
+   <content type="html">&lt;p&gt;AirVideo 제작사에서는 데스크탑 운영체제용 AirVideo 플레이어를 제공하고 있지 않다.
+동영상 스트리밍을 위한 다양한 솔루션들이 있겠지만, 이미 AirVideo 서버를 운영하고 있다면 이를 최대한 활용해보자.&lt;/p&gt;
+
+&lt;h3&gt;Windows&lt;/h3&gt;
+
+&lt;p&gt;다운로드: &lt;a href=&quot;http://dl.dropbox.com/u/10205542/AirVideoClient_win32_20111218.zip&quot;&gt;http://dl.dropbox.com/u/10205542/AirVideoClient_win32_20111218.zip&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Media Player 혹은 QuickTime Player 를 이용해 동영상을 재생한다.
+다른 재생 프로그램을 사용하려면 동영상 파일 URL을 복사해 붙이면 된다.&lt;/p&gt;
+
+&lt;h3&gt;Mac OS X&lt;/h3&gt;
+
+&lt;p&gt;다운로드: &lt;a href=&quot;http://dl.dropbox.com/u/6713110/MacAirVideoClient/Site/Home.html&quot;&gt;http://dl.dropbox.com/u/6713110/MacAirVideoClient/Site/Home.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;VLC Player를 이용해 동영상을 재생한다.
+서버 주소를 등록하고 동영상 파일을 선택하면, VLC 가 실행되어 동영상을 재생한다.&lt;/p&gt;
 </content>
  </entry>
  
