@@ -4,7 +4,7 @@
  <title>CODEHolic</title>
  <link href="http://codeholic.net/atom.xml" rel="self"/>
  <link href="http://codeholic.net"/>
- <updated>2012-12-07T19:34:11+09:00</updated>
+ <updated>2012-12-08T02:50:02+09:00</updated>
  <id>http://codeholic.net</id>
  <author>
    <name>Chan Shik Lim</name>
@@ -44,34 +44,33 @@
 
 &lt;p&gt;install.sh&lt;/p&gt;
 
-&lt;pre&gt;
-yum -y install gcc gdbm-devel readline-devel ncurses-devel zlib-devel bzip2-devel sqlite-devel db4-devel openssl-devel tk-devel bluez-libs-devel make
-cd /var/tmp
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;yum -y install gcc gdbm-devel readline-devel ncurses-devel zlib-devel bzip2-devel sqlite-devel db4-devel openssl-devel tk-devel bluez-libs-devel make
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /var/tmp
 
 wget http://sqlite.org/sqlite-amalgamation-3.7.3.tar.gz
 tar xfz sqlite-amalgamation-3.7.3.tar.gz
-cd sqlite-3.7.3/
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;sqlite-3.7.3/
 ./configure
 make
 make install
 
-cd /var/tmp
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /var/tmp
 wget http://www.python.org/ftp/python/2.7.1/Python-2.7.1.tgz
 tar xvfz Python-2.7.1.tgz
-cd Python-2.7.1
-./configure --prefix=/opt/python2.7.1 --with-threads --enable-shared
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;Python-2.7.1
+./configure --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/opt/python2.7.1 --with-threads --enable-shared
 make
 make install
  
 touch /etc/ld.so.conf.d/opt-python2.7.1.conf
-echo &quot;/opt/python2.7.1/lib/&quot; &gt;&gt; /etc/ld.so.conf.d/opt-python2.7.1.conf
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;/opt/python2.7.1/lib/&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; /etc/ld.so.conf.d/opt-python2.7.1.conf
 ldconfig
  
 ln -sf /opt/python2.7.1/bin/python /usr/bin/python2.7
  
-cd /var/tmp
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /var/tmp
 wget http://pypi.python.org/packages/2.7/s/setuptools/setuptools-0.6c11-py2.7.egg
-sh setuptools-0.6c11-py2.7.egg --prefix=/opt/python2.7.1
+sh setuptools-0.6c11-py2.7.egg --prefix&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/opt/python2.7.1
  
 /opt/python2.7.1/bin/easy_install pip
 ln -sf /opt/python2.7.1/bin/pip /usr/bin/pip
@@ -81,7 +80,8 @@ ln -sf /opt/python2.7.1/bin/virtualenv /usr/bin/virtualenv
  
 mv /usr/bin/python /usr/bin/python-backup
 ln -s /usr/bin/python2.7 /usr/bin/python
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 
 &lt;p&gt;위 코드를 install.sh 에 저장하고 루트 권한으로 실행하면
@@ -138,20 +138,20 @@ $ vi /home/gitlab/gitlab/config/environments/production.rb
 
 &lt;p&gt;아래 내용을 추가한다.&lt;/p&gt;
 
-&lt;pre&gt;
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :address =&gt; 'smtp.gmail.com',
-    :port =&gt; 587,
-    :domain =&gt; 'domain.com',
-    :authentication =&gt; :plain,
-    :user_name =&gt; 'account@domain.com',
-    :password =&gt; 'password',
-    :enable_starttls_auto =&gt; true
-  }
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
-&lt;/pre&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;action_mailer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delivery_method&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:smtp&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;action_mailer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;smtp_settings&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;:address&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;smtp.gmail.com&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;:port&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;587&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;:domain&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;domain.com&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;:authentication&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:plain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;:user_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;account@domain.com&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;:password&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;password&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;:enable_starttls_auto&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;action_mailer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;perform_deliveries&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;action_mailer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;raise_delivery_errors&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 
 &lt;h3&gt;메일이 발송되지 않을 경우에 resque 재시작&lt;/h3&gt;
@@ -179,65 +179,65 @@ $ sudo -u gitlab sh -l -c &quot;cd /home/gitlab/gitlab &gt; /dev/null 2&gt;&amp;
 $ sudo vi /etc/nginx/nginx.conf
 &lt;/code&gt;&lt;/p&gt;
 
-&lt;pre&gt;
-    ..
-    server {
-        listen       80;
-        server_name  domain.com;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;nginx&quot;&gt;    &lt;span class=&quot;k&quot;&gt;..&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;listen&lt;/span&gt;       &lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;server_name&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;domain.com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-       location / {
-           rewrite ^ https://domain.com permanent;
-       }
-    }
-    ..
-&lt;/pre&gt;
+       &lt;span class=&quot;kn&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+           &lt;span class=&quot;kn&quot;&gt;rewrite&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;^&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;https://domain.com&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;permanent&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+       &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;..&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 
 &lt;p&gt;HTTPS 접속을 처리할 server를 추가한다.&lt;/p&gt;
 
-&lt;pre&gt;
-server {
-  listen 443;
-  server_name domain.com;
-  root /home/gitlab/gitlab/public;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;nginx&quot;&gt;&lt;span class=&quot;k&quot;&gt;server&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;listen&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;443&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;server_name&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;domain.com&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/home/gitlab/gitlab/public&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-  # individual nginx logs for this gitlab vhost
-  access_log  /var/log/nginx/gitlab_access.log;
-  error_log   /var/log/nginx/gitlab_error.log;
+  &lt;span class=&quot;c1&quot;&gt;# individual nginx logs for this gitlab vhost&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;access_log&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;/var/log/nginx/gitlab_access.log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;error_log&lt;/span&gt;   &lt;span class=&quot;s&quot;&gt;/var/log/nginx/gitlab_error.log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-        ssl                  on;
-        #ssl_certificate      cert.pem;
-        #ssl_certificate_key  cert.key;
-        ssl_certificate      /var/ssl/ssl_certificate.crt/
-        ssl_certificate_key  /var/ssl/ssl_certificate_key/
+        &lt;span class=&quot;kn&quot;&gt;ssl&lt;/span&gt;                  &lt;span class=&quot;no&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;#ssl_certificate      cert.pem;&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;#ssl_certificate_key  cert.key;&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;ssl_certificate&lt;/span&gt;      &lt;span class=&quot;s&quot;&gt;/var/ssl/ssl_certificate.crt/&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;ssl_certificate_key&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;/var/ssl/ssl_certificate_key/&lt;/span&gt;
 
-        ssl_session_timeout  5m;
-        ssl_protocols  SSLv2 SSLv3 TLSv1;
-        ssl_ciphers  HIGH:!aNULL:!MD5;
-        ssl_prefer_server_ciphers   on;
+        &lt;span class=&quot;s&quot;&gt;ssl_session_timeout&lt;/span&gt;  &lt;span class=&quot;mi&quot;&gt;5m&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;ssl_protocols&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;SSLv2&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;SSLv3&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;TLSv1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;ssl_ciphers&lt;/span&gt;  &lt;span class=&quot;s&quot;&gt;HIGH:!aNULL:!MD5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kn&quot;&gt;ssl_prefer_server_ciphers&lt;/span&gt;   &lt;span class=&quot;no&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
 
-  location / {
-    # serve static files from defined root folder;.
-    # @gitlab is a named location for the upstream fallback, see below
-    try_files $uri $uri/index.html $uri.html @gitlab;
-  }
+  &lt;span class=&quot;kn&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# serve static files from defined root folder;.&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# @gitlab is a named location for the upstream fallback, see below&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;try_files&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$uri&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$uri/index.html&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$uri.html&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@gitlab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-  # if a file, which is not found in the root folder is requested,
-  # then the proxy pass the request to the upsteam (gitlab unicorn)
-  location @gitlab {
-    proxy_read_timeout 300;
-    proxy_connect_timeout 300;
-    proxy_redirect     off;
+  &lt;span class=&quot;c1&quot;&gt;# if a file, which is not found in the root folder is requested,&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# then the proxy pass the request to the upsteam (gitlab unicorn)&lt;/span&gt;
+  &lt;span class=&quot;kn&quot;&gt;location&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@gitlab&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;proxy_read_timeout&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;proxy_connect_timeout&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;300&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;proxy_redirect&lt;/span&gt;     &lt;span class=&quot;no&quot;&gt;off&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-    proxy_set_header   X-Forwarded-Proto $scheme;
-    proxy_set_header   Host              $http_host;
-    proxy_set_header   X-Real-IP         $remote_addr;
+    &lt;span class=&quot;kn&quot;&gt;proxy_set_header&lt;/span&gt;   &lt;span class=&quot;s&quot;&gt;X-Forwarded-Proto&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$scheme&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;proxy_set_header&lt;/span&gt;   &lt;span class=&quot;s&quot;&gt;Host&lt;/span&gt;              &lt;span class=&quot;nv&quot;&gt;$http_host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;proxy_set_header&lt;/span&gt;   &lt;span class=&quot;s&quot;&gt;X-Real-IP&lt;/span&gt;         &lt;span class=&quot;nv&quot;&gt;$remote_addr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-    proxy_pass http://gitlab;
-  }
-}
-&lt;/pre&gt;
+    &lt;span class=&quot;kn&quot;&gt;proxy_pass&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://gitlab&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
 
 
 &lt;h2&gt;참고 문서&lt;/h2&gt;
