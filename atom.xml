@@ -4,13 +4,41 @@
  <title>CODEHolic</title>
  <link href="http://codeholic.net/atom.xml" rel="self"/>
  <link href="http://codeholic.net"/>
- <updated>2012-12-08T02:50:02+09:00</updated>
+ <updated>2012-12-10T23:50:48+09:00</updated>
  <id>http://codeholic.net</id>
  <author>
    <name>Chan Shik Lim</name>
    <email></email>
  </author>
 
+ 
+ <entry>
+   <title>Mac Mail with GMail IMAP</title>
+   <link href="http://codeholic.net/2012/12/10/mac-mail-with-gmail-imap"/>
+   <updated>2012-12-10T00:00:00+09:00</updated>
+   <id>http://codeholic.net/2012/12/10/mac-mail-with-gmail-imap</id>
+   <content type="html">&lt;h3&gt;문제점&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;파일을 지워도 계속 다시 나타남&lt;/li&gt;
+&lt;li&gt;GMail 에서 제공해주는 IMAP 에서는 파일을 지워도 &lt;strong&gt;전체 보관함&lt;/strong&gt;에 남아있기 때문&lt;/li&gt;
+&lt;li&gt;로컬에서 아무리 지워도 동기화하는 과정에서 다시 메일을 받아옴 - 지워도 다시 나타나는 원인&lt;/li&gt;
+&lt;/ul&gt;
+
+
+&lt;h3&gt;해결 방법&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Preferences - Accounts - Mail behaviors 에서 Trash 영역에 있는 &lt;strong&gt;Store deleted messages on the server&lt;/strong&gt; 를 선택한다.&lt;/li&gt;
+&lt;li&gt;일반적으로는 위에 항목을 선택해두지 않는다. 왜냐하면 로컬에서 지운 메시지를 서버에 굳이 남겨둘 필요가 없기 때문이다.&lt;/li&gt;
+&lt;li&gt;하지만, GMail 에서는 메일을 지우지 않고 전체보관함에 계속 저장해둔다. 그러므로 로컬에서 지운 메일을 따로 보관해두도록 한다.&lt;/li&gt;
+&lt;li&gt;로컬에서 메일을 지우면 서버에서는 &lt;strong&gt;deleted-messages&lt;/strong&gt; 라는 라벨을 가진 메일함에 &lt;strong&gt;삭제한 메일&lt;/strong&gt;을 따로 모아둔다.&lt;/li&gt;
+&lt;li&gt;정말 메일을 삭제하고 싶다면, GMail 에 웹 혹은 앱을 통해 접속한 다음 &lt;strong&gt;deleted-messages&lt;/strong&gt; 메일함에 있는 모든 메일을 삭제한다.&lt;/li&gt;
+&lt;li&gt;로컬 휴지통 (Trashes) 안에 남아있는 메일까지 삭제한다. (보통은 일정 시간 후에 삭제됨)&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>GitLabHQ Installation</title>
