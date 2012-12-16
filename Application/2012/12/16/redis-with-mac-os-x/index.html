@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Redis with Mac OS X</title>
+    <meta name="description" content="Redis server running in Mac OS X">
+    <meta name="author" content="Chan Shik Lim">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/themes/twitter/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/themes/twitter/css/style.css?body=1" rel="stylesheet" type="text/css" media="all">
+    <link href="/assets/themes/twitter/css/highlight.css" rel="stylesheet" type="text/css" media="all">
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36875488-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">CODEHolic</a>
+          <ul class="nav">
+            
+            
+            
+
+
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        
+<div class="page-header">
+  <h1>Redis with Mac OS X </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <h1>Mac OS X 에서 Redis를 서비스로 구동 시키기</h1>
+
+<h2>redis-server 등록</h2>
+
+<p>Mac OS X 시스템을 시작할 때, redis-server 를 실행하기 위해서 launchd 을 이용하자.</p>
+
+<p>먼저 /Library/LaunchDaemons 디렉토리에 plist 파일을 생성해 등록한다.</p>
+
+<p><code>
+$ sudo vim /Library/LaunchDaemons/io.redis.redis-server.plist
+</code></p>
+
+<p>plist 파일에 아래 내용을 복사한다.</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+    &lt;key&gt;Label&lt;/key&gt;
+    &lt;string&gt;io.redis.redis-server&lt;/string&gt;
+    &lt;key&gt;Program&lt;/key&gt;
+    &lt;string&gt;/usr/local/bin/redis-server&lt;/string&gt;
+    &lt;key&gt;ProgramArguments&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;/usr/local/bin/redis-server&lt;/string&gt;
+        &lt;string&gt;/usr/local/etc/redis.conf&lt;/string&gt;
+    &lt;/array&gt;
+    &lt;key&gt;RunAtLoad&lt;/key&gt;
+    &lt;true/&gt;
+    &lt;key&gt;KeepAlive&lt;/key&gt;
+    &lt;true/&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+</code></pre>
+
+<p>위 설정 파일에서는 <strong>redis-server</strong> 파일이 <strong>/usr/local/bin</strong> 에 있다고 명시하였다.</p>
+
+<p>brew 를 이용해 설치한 경우에는 대부분 위의 경로에 실행 파일이 있겠지만, 그렇지 않을 경우에는 정확한 위치를 지정한다.
+redis.conf 파일이 있는 위치 또한 중요하므로, 잘못된 경로가 기록되지 않도록 주의한다.</p>
+
+<p>plist 파일에 추가적인 옵션이 있는데, 먼저
+RunAtLoad 옵션을 true 로 설정해 시스템 시작 후에 자동으로 실행되도록 한다.
+KeepAlive 옵션은 <strong>kill</strong> 명령 등을 통해 redis-server 가 종료될 경우에 다시 시작해주도록 하는 설정이다. 해당 옵션을 true 로 지정하면, launchd 명령을 통해 종료해야 한다.</p>
+
+<p>plist 파일을 생성한 후에는 launchd 에 redis-server 데몬을 등록한다.</p>
+
+<p><code>
+$ sudo launchctl load /Library/LaunchDaemons/io.redis.redis-server.plist
+</code></p>
+
+<h2>서비스 시작 및 종료</h2>
+
+<p>앞에서 등록한 redis-server 데몬을 시작하자.</p>
+
+<p><code>
+$ sudo launchctl start io.redis.redis-server
+</code></p>
+
+<p>redis-server 데몬을 종료하고자 한다면,</p>
+
+<p><code>
+$ sudo launchctl stop io.redis.redis-server
+</code></p>
+
+<p>매번 긴 명령을 쳐서 시작하거나 중지시키기는 불편하니, 시작 스크립트에 다음 명령을 기록해둔다.</p>
+
+<pre><code>$ vi .bash_profile
+
+alias redis-start='sudo launchctl start io.redis.redis-server'
+alias redis-stop='sudo launchctl stop io.redis.redis-server'
+</code></pre>
+
+<p>마지막으로 redis-server 를 데몬으로 띄우기 위해 redis.conf 파일을 잊지 말고 수정하자.</p>
+
+<pre><code>$ sudo vi /usr/local/etc/redis.conf
+
+# By default Redis does not run as a daemon. Use 'yes' if you need it.
+# Note that Redis will write a pid file in /usr/local/var/run/redis.pid when daemonized.
+daemonize yes
+</code></pre>
+
+<h2>출처</h2>
+
+<ol>
+<li><a href="http://naleid.com/blog/2011/03/05/running-redis-as-a-user-daemon-on-osx-with-launchd/">http://naleid.com/blog/2011/03/05/running-redis-as-a-user-daemon-on-osx-with-launchd/</a></li>
+</ol>
+
+
+    <hr>
+    <div class="pagination">
+      <ul>
+      
+        <li class="prev"><a href="/Application/2012/12/10/mac-mail-with-gmail-imap" title="Mac Mail with GMail IMAP">&larr; Previous</a></li>
+      
+        <li><a href="/archive.html">Archive</a></li>
+      
+        <li class="next disabled"><a>Next &rarr;</a>
+      
+      </ul>
+    </div>
+    <hr>
+    
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>16 December 2012</span></div>
+
+  
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    
+
+
+  
+     
+    	<li><a href="/tags.html#mac-ref">mac <span>4</span></a></li>
+     
+    	<li><a href="/tags.html#osx-ref">osx <span>3</span></a></li>
+     
+    	<li><a href="/tags.html#redis-ref">redis <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#redis-server-ref">redis-server <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#launchd-ref">launchd <span>1</span></a></li>
+    
+  
+
+
+
+    </ul>
+    
+  </div>
+</div>
+
+
+      </div>
+
+      <footer>
+        <p>&copy; Chan Shik Lim 2012 
+          with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+  </body>
+</html>
+
